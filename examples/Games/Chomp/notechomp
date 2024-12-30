@@ -1,0 +1,12 @@
+$i4096 = turn
+$i4097 = x counter
+$i4098 = input
+$i4099 = row pointer
+
+$i4100 = row 1
+$i4101 = row 2
+$i4102 = row 3
+$i4103 = row 4
+
+$i4104 = output buffer
+$i4105 = y input storage

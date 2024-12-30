@@ -1,0 +1,75 @@
+%hE79D cube line/dot color
+
+$h2F48 = bg color direction
+
+$h2F49 = cosa (yaw)
+$h2F4A = sina (yaw)
+
+$h2F4B = cosb (pitch)
+$h2F4C = sinb (pitch)
+
+$h2F4D = cosc (roll)
+$h2F4E = sinc (roll)
+
+$h2F4F = Axx
+$h2F50 = Axy
+$h2F51 = Axz
+
+$h2F52 = Ayx
+$h2F53 = Ayy
+$h2F54 = Ayz
+
+$h2F55 = Azx
+$h2F56 = Azy
+$h2F57 = Azz
+
+$h2F58 = pitch
+$h2F59 = roll
+$h2F5A = yaw
+
+$h2F5B = x1
+$h2F5C = y1
+
+$h2F5D = x2
+$h2F5E = y2
+
+$h2F5F = x3
+$h2F60 = y3
+
+$h2F61 = x4
+$h2F62 = y4
+
+$h2F63 = x5
+$h2F64 = y5
+
+$h2F65 = x6
+$h2F66 = y6
+
+$h2F67 = x7
+$h2F68 = y7
+
+$h2F69 = x8
+$h2F6A = y8
+
+$h2F6B = x input for math
+$h2F6C = y input for math
+$h2F6D = z input for math
+
+$h2F73 = MATH BUFFER 1 (used by clamp and getter functions)
+$h2F74 = MATH BUFFER 2 (used for calculating Ax*,Ay*,Az*)
+$h2F75 = MATH BUFFER 3 (x coord in multiply function)
+$h2F76 = MATH BUFFER 4 (y coord in multiply function)
+$h2F77 = MATH BUFFER 5 (z coord in multiply function)
+$h2F78 = MATH BUFFER 6 (x when converting to 2d)
+$h2F79 = MATH BUFFER 7 (y when converting to 2d)
+$h2F7A = MATH BUFFER 8
+$h2F7B = color
+$h2F7C = should change color
+$h2F7D = redDirection
+$h2F7E = greenDirection
+$h2F7F = blueDirection
+73 => 7B
+
+h2F75 r
+h2F76 g
+h2F77 b

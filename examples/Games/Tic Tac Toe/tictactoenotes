@@ -1,0 +1,53 @@
+1 $ = address
+2 &= address sparad på annan adress, ex &F5 hämtar addressen sparad på F5
+3 %= immediate
+4 = # jump
+
+
+# jump label
+
+port 0: tangentbord
+port 1: data in
+port 2: data in
+
+
+
+ x |x |x
+---#---#---
+ x |x |x
+---#---#---
+ x |x |x
+
+
+4096 = vilken ruta
+
+4097 = ruta 1
+4098 = ruta 2
+4099 = ruta 3
+
+4100 = ruta 4
+4101 = ruta 5
+4102 = ruta 6
+
+4103 = ruta 7
+4104 = ruta 8
+4105 = ruta 9
+
+4106 = turn
+4107 = input 
+4108 = draw buffer
+4109 = winstatus
+
+                          
+ #-----------------------#
+ |                       |
+ |  ____           ____  |
+ |  |   |          |   | |
+ |  |   |          |   | |
+ |  |  *|          |  *| |
+ |__|___|__________|___|_|
+ |                       |
+ |                       |
+ #-----------------------#
+ dörr välj rätt dörr spel
+ rysk roulette

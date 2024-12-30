@@ -1,0 +1,28 @@
+%hCF45 LINE IN MIDDLE
+%hAE04 BACKGROUND COLOR 
+%hE79D BALL COLOR
+
+space = 32
+fire knapp = input & 16
+
+$h2F48 = p1 y
+$h2F49 = p2 Y 
+
+$h2F4A = ball x
+$h2F4B = ball y 
+
+$h2F4C = ball x direction
+$h2F4D = ball y direction 
+
+$h2F4E = drawing offset
+$h2F4F = score p1
+$h2F50 = score p2
+
+$h2F51 = isBallAlive 
+$h2F52 = joystick buffer
+
+$h2F53 = math buffer 1
+$h2F54 = math buffer 2
+
+$h2F55 = math buffer 3
+$h2F56 = math buffer 4

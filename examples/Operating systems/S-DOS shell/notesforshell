@@ -1,0 +1,82 @@
+
+$h2F40 = input
+$h2F41 = string storage / hexprint
+$h2F42 = loadCounter/offset
+$h2F3E = SUM OF INSTRUCTION ???
+$h2F3F = is program loaded?
+$h2F3D = CLEARCOUNTER OFFSET /MEMCHECK COUNTER
+$h2F3C = INTERNAL LOOP
+
+//replacing old addresses
+$h2F40 => h2F41 (DONE)
+$h2F41 => h2F42 (DONE)
+$h2F42 => h2F43 (DONE)
+$h2F3C => h2F44 (DONE)
+$h2F3D => h2F45 (DONE)
+$h2F3E => h2F46 (DONE?)
+$h2F3F => h2F47 (DONE)
+
+variabelminne för program börjar på h2F48
+
+257 enter
+
+259 backspace
+
+261 delete
+
+
+kommandon:
+
+LOAD 1: 76+79+65+68+32+49 = 369
+LOAD 2: 76+79+65+68+32+50 = 370
+
+RUN: 82+85+78 = 245
+
+VERSION: 86+69+82+83+73+79+78 = 550
+
+CLEAR = 67 + 76 + 69 + 65 + 82 = 359
+
+RESET = 82 + 69 + 83 + 69 + 84 = 387
+
+LIST = 76 + 73 + 83 + 84 = 316
+
+TUX = 84 + 85 + 88 = 257
+
+HELP = 72 + 69 + 76 + 80 = 297
+
+MEMCHK = 77 + 69 + 77 + 67 + 72 + 75 = 437 
+
+BÖRJA LADDA PROGRAM PÅ h3040 (instruktion hFC1) (TIDIGARE 2F43)
+hC0BA = 49338 (antalet minnesplatser)
+
+använd D0BC som räknare, läs in tre värden åt gången
+
+h403E = 16446 (antalet instruktioner)
+
+TUX!
+
+    .--.
+   |o_o |
+   |:_/ |
+  //   \ \
+ (|     | )
+/'\_   _/`\
+\___)=(___/ 
+
+
+
+
+
+LODI $h2F3D %h2F43
+MOVE $h2F3C $h2F3D
+ADDI $h2F3C %i66
+
+
+
+78
+79
+32
+77
+79
+82
+69

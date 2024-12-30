@@ -1,0 +1,84 @@
+
+$h2F41 = input (mouse/arrow keys/joystick)
+$h2F42 = loadCounter/offset
+$h2F43 = is program loaded?
+$h2F44 = drawing counter
+$h2F45 = CURSOR X
+$h2F46 = CURSOR Y
+$h2F47 MATH BUFFER 1
+$h2F48 MATH BUFFER 2
+$h2F49 MATH BUFFER 3
+$h2F4A MATH BUFFER 4
+$h2F4B MATH BUFFER 5
+
+257 enter
+
+259 backspace
+
+261 delete
+
+CURSOR COLORS:
+arrow tip = black 0
+arrow stick = %hAD55
+
+U:265
+D:264
+L:263
+R:262
+
+
+kommandon:
+
+LOAD 1: 76+79+65+68+32+49 = 369
+LOAD 2: 76+79+65+68+32+50 = 370
+
+RUN: 82+85+78 = 245
+
+VERSION: 86+69+82+83+73+79+78 = 550
+
+CLEAR = 67 + 76 + 69 + 65 + 82 = 359
+
+RESET = 82 + 69 + 83 + 69 + 84 = 387
+
+LIST = 76 + 73 + 83 + 84 = 316
+
+TUX = 84 + 85 + 88 = 257
+
+HELP = 72 + 69 + 76 + 80 = 297
+
+MEMCHK = 77 + 69 + 77 + 67 + 72 + 75 = 437 
+
+BÖRJA LADDA PROGRAM PÅ 2F43 (instruktion hFC1)
+hC0BA = 49338 (antalet minnesplatser)
+
+använd D0BC som räknare, läs in tre värden åt gången
+
+h403E = 16446 (antalet instruktioner)
+
+TUX!
+
+    .--.
+   |o_o |
+   |:_/ |
+  //   \ \
+ (|     | )
+/'\_   _/`\
+\___)=(___/ 
+
+
+
+
+
+LODI $h2F3D %h2F43
+MOVE $h2F3C $h2F3D
+ADDI $h2F3C %i66
+
+
+
+78
+79
+32
+77
+79
+82
+69
