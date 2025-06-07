@@ -7,6 +7,7 @@
 #include <sstream>
 #include <filesystem>
 #include <cmath>
+#include <cstring>
 
 
 struct Instruction
@@ -35,6 +36,18 @@ struct JumpLabel
     }
 };
 
+struct Constant
+{
+    std::string name;
+    int value = 0;
+
+    Constant(std::string _name, int _value)
+    {
+        name = _name;
+        value = _value;
+    }
+};
+
 struct assetFileStruct
 {
     int wordCount = 0;
@@ -49,6 +62,7 @@ struct assetFileStruct
 
 std::vector<JumpLabel> jumps;
 std::vector<assetFileStruct> assetFilesData;
+std::vector<Constant> constants;
 
 
 enum{
@@ -190,6 +204,20 @@ int16_t getLinenumberFromLabel(std::string label)
     
 }
 
+int16_t getValueFromConstant(std::string constant)
+{
+    for (int i = 0; i < (int)constants.size(); i++)
+    {
+        if(constants[i].name == constant)
+        {
+            return constants[i].value;
+        }
+    }
+
+    return 0;
+    
+}
+
 int16_t getAddressFromFile(std::string i)
 {
     int fIndex = (int)std::stoi(i);
@@ -258,6 +286,10 @@ Arguments argumentSolver(std::string argument1, std::string argument2)
             args.a1Value = getSizeFromFile(argument1.substr(2, argument1.size() - 2));
             std::cout << "size 1: " << args.a1Value << "\n";
             break;
+        case '?':
+            args.a1Value = getValueFromConstant(argument1.substr(2, argument1.size() - 2));
+            std::cout << "constant 1: \" " << argument1 << "\" value: " << args.a1Value << "\n";
+            break;
         default:
             break;
         }
@@ -304,6 +336,10 @@ Arguments argumentSolver(std::string argument1, std::string argument2)
         case 's':
             args.a2Value = getSizeFromFile(argument2.substr(2, argument2.size() - 2));
             std::cout << "size 2: " << args.a2Value << "\n";
+            break;
+        case '?':
+            args.a2Value = getValueFromConstant(argument2.substr(2, argument2.size() - 2));
+            std::cout << "constant 2: \" " << argument2 << "\" value: " << args.a2Value << "\n";
             break;
         default:
             break;
@@ -846,7 +882,8 @@ int main(int argc, char *argv[])
                     line[2] == 'S' && 
                     line[3] == 'E' && 
                     line[4] == 'T' && 
-                    line[5] == ' ')
+                    line[5] == ' '
+                )
                 {
                     assetFiles.push_back(line.substr(6, line.size() - 6));
                     isAsset = true;
@@ -883,8 +920,48 @@ int main(int argc, char *argv[])
             {  
                 jumps.push_back(JumpLabel(sourceLines[i], i));
             }
+            else if(sourceLines[i].length() > 7)
+            {  
+                if(
+                    sourceLines[i][0] == 'D' && 
+                    sourceLines[i][1] == 'E' && 
+                    sourceLines[i][2] == 'F' && 
+                    sourceLines[i][3] == 'I' && 
+                    sourceLines[i][4] == 'N' && 
+                    sourceLines[i][5] == 'E' &&
+                    sourceLines[i][6] == ' '
+                )
+                {
+                    std::vector<std::string> splitConst = splitString(sourceLines[i]);
+    
+                    if(splitConst.size() > 2)
+                    {
+    
+                        int actualValue = 0;
+                        
+                        switch (splitConst[2][0])
+                        {
+                            case 'h':
+                                actualValue = hexToInt(splitConst[2].substr(1, splitConst[2].size() - 1));
+                                break; 
+                            case 'i':
+                                actualValue = intToInt(splitConst[2].substr(1, splitConst[2].size() - 1));
+                                break; 
+                            case 'f':
+                                actualValue = floatToInt(splitConst[2].substr(1, splitConst[2].size() - 1));
+                                break;
+                            default:
+                                break;
+                        }
+                        
+                        constants.push_back(Constant(splitConst[1], actualValue));
+                        
+                    }
+                }
+            }
+            
         }
-        std::cout << (int)sourceLines.size();
+        std::cout << "Instruction count: " << (int)sourceLines.size() << "\n";
         for (int L = 0; L < (int)sourceLines.size(); L++)
         {
             std::string splitInstruction[3] = {"", "", ""};

@@ -1,0 +1,45 @@
+{
+	"name": "ACIDIC",
+	"displayName": "ACIDIC",
+	"description": "ACIDIC is a language designed for the ACID700 fantasy computer.",
+	"author": {
+		"name": "Anton Lamberth"
+	},
+	"publisher": "Anton Lamberth",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.85.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "acidic",
+				"aliases": [
+					"ACIDIC",
+					"acidic"
+				],
+				"extensions": [
+					".acid"
+				],
+				"configuration": "./language-configuration.json",
+				"icon": {
+					"light": "./icon.png",
+					"dark": "./icon.png"
+				}
+			}
+		],
+		"grammars": [
+			{
+				"language": "acidic",
+				"scopeName": "source.ACIDIC",
+				"path": "./syntaxes/ACIDIC.tmLanguage.json"
+			}
+		]
+	},
+	"__metadata": {
+		"size": 153504
+	}
+}

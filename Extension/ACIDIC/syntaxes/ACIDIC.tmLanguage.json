@@ -1,0 +1,60 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "ACIDIC",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#labels"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.ACIDIC",
+					"match": "\\b(BRNU|BRNP|BRNZ|BRNN|JMPU|JMPP|JMPZ|JMPN|CALL|CALLJ|RET|WVB)\\b"
+				},
+				{
+					"name": "keyword.other.ACIDIC",
+					"match": "\\b(NOP|SFR|GFR|CITF|CFTI|RAND|COMP|LODX|LODY|LODZ|STOX|STOY|STOZ|LODI|LODF|MOVE|SWAP|ADDI|ADDF|SUBI|SUBF|MULI|MULF|DIVI|DIVF|PUSH|POP|OUT|IN|SOUND|COS|SIN|XOR|OR|AND|NOT|ARSH|ALSH|LRSH|LLSH|RRSH|RLSH)\\b"
+				}
+		
+			]
+		},
+		"constants": {
+			"patterns": [
+                {
+                    "name": "constant.numeric.ACIDIC",
+			        "match": "(\\B([$&%][aihf][a-fA-F0-9]+)\\b)|(((?<=[A-Za-z_0-9]+? )[aihf][a-fA-F0-9]+))"
+                },
+                {
+                    "name": "string.quoted.ACIDIC",
+			        "match": "(?<=ASSET )[a-zA-Z0-9.\\\/]+"
+                }
+            ]
+		},
+		"labels": {
+            "patterns": [
+                {
+                    "name": "entity.name.function.ACIDIC",
+                    "match": "\\B([#][A-Za-z_0-9]+)\\b"
+                },
+                {
+                    "name": "variable.other.ACIDIC",
+                    "match": "((?<=DEFINE )[A-Za-z_0-9]+)|(\\B([$&%]\\?[A-Za-z_0-9]+)\\b)"
+                },
+                {
+                    "name": "storage.type.ACIDIC",
+                    "match": "(ASSET)|(DEFINE)"
+                }
+            ]
+		}
+
+	},
+	"scopeName": "source.ACIDIC"
+}
