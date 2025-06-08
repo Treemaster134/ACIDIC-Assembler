@@ -1,4 +1,5 @@
 //standard c++ headers
+#include <algorithm>
 #include <iostream>
 #include <cstdint>
 #include <fstream>
@@ -873,6 +874,11 @@ int main(int argc, char *argv[])
 
         while (std::getline(sourcecode, line))
         {
+
+            //To account for cross-platform b******t, all carriage returns and linefeeds are removed
+            line.erase(std::remove(line.begin(), line.end(), '\r' ), line.end());
+            line.erase(std::remove(line.begin(), line.end(), '\n' ), line.end());
+
             bool isAsset = false;
             if(line.length() > 6)
             {
@@ -885,8 +891,49 @@ int main(int argc, char *argv[])
                     line[5] == ' '
                 )
                 {
-                    assetFiles.push_back(line.substr(6, line.size() - 6));
+                    std::string assetPathString = line.substr(6, line.size() - 6);
+
+                    assetFiles.push_back(assetPathString);
                     isAsset = true;
+                }
+                else if(line.length() > 7)
+                {  
+                    if(
+                        line[0] == 'D' && 
+                        line[1] == 'E' && 
+                        line[2] == 'F' && 
+                        line[3] == 'I' && 
+                        line[4] == 'N' && 
+                        line[5] == 'E' &&
+                        line[6] == ' '
+                    )
+                    {
+                        std::vector<std::string> splitConst = splitString(line);
+        
+                        if(splitConst.size() > 2)
+                        {
+        
+                            int actualValue = 0;
+                            
+                            switch (splitConst[2][0])
+                            {
+                                case 'h':
+                                    actualValue = hexToInt(splitConst[2].substr(1, splitConst[2].size() - 1));
+                                    break; 
+                                case 'i':
+                                    actualValue = intToInt(splitConst[2].substr(1, splitConst[2].size() - 1));
+                                    break; 
+                                case 'f':
+                                    actualValue = floatToInt(splitConst[2].substr(1, splitConst[2].size() - 1));
+                                    break;
+                                default:
+                                    break;
+                            }
+                            
+                            constants.push_back(Constant(splitConst[1], actualValue));
+                            
+                        }
+                    }
                 }
             }
             
@@ -903,10 +950,9 @@ int main(int argc, char *argv[])
         {
             for (int i = 0; i < assetCount; i++)
             {
-                //std::cout << assetFiles[i] << " ";
-                std::filesystem::path p{assetFiles[i]};
-                int sizeOfFile = (int)ceil(std::filesystem::file_size(p)/2.0f);
-                //std::cout << sizeOfFile << "\n";
+                std::filesystem::path p = std::filesystem::path(assetFiles[i]);
+                int sizeOfFile = (int)std::filesystem::file_size(p);
+                sizeOfFile = (int)ceilf((float)sizeOfFile/2.0f);
                 assetFilesData.push_back(assetFileStruct(sizeOfFile, totalassetsOffset));
                 totalassetsOffset += sizeOfFile;
 
@@ -920,47 +966,8 @@ int main(int argc, char *argv[])
             {  
                 jumps.push_back(JumpLabel(sourceLines[i], i));
             }
-            else if(sourceLines[i].length() > 7)
-            {  
-                if(
-                    sourceLines[i][0] == 'D' && 
-                    sourceLines[i][1] == 'E' && 
-                    sourceLines[i][2] == 'F' && 
-                    sourceLines[i][3] == 'I' && 
-                    sourceLines[i][4] == 'N' && 
-                    sourceLines[i][5] == 'E' &&
-                    sourceLines[i][6] == ' '
-                )
-                {
-                    std::vector<std::string> splitConst = splitString(sourceLines[i]);
-    
-                    if(splitConst.size() > 2)
-                    {
-    
-                        int actualValue = 0;
-                        
-                        switch (splitConst[2][0])
-                        {
-                            case 'h':
-                                actualValue = hexToInt(splitConst[2].substr(1, splitConst[2].size() - 1));
-                                break; 
-                            case 'i':
-                                actualValue = intToInt(splitConst[2].substr(1, splitConst[2].size() - 1));
-                                break; 
-                            case 'f':
-                                actualValue = floatToInt(splitConst[2].substr(1, splitConst[2].size() - 1));
-                                break;
-                            default:
-                                break;
-                        }
-                        
-                        constants.push_back(Constant(splitConst[1], actualValue));
-                        
-                    }
-                }
-            }
-            
         }
+
         std::cout << "Instruction count: " << (int)sourceLines.size() << "\n";
         for (int L = 0; L < (int)sourceLines.size(); L++)
         {
@@ -972,8 +979,6 @@ int main(int argc, char *argv[])
                 splitInstruction[i] = splitvector[i];
             }
             
-            
-
             //std::cout << splitInstruction[0] << "," << splitInstruction[1] << "," << splitInstruction[2] << "\n";
             Instruction ei = encodeInstruction(splitInstruction, L);
             //std::cout << ei.opcode << "," << ei.arg1 << "," << ei.arg2 << "\n\n";

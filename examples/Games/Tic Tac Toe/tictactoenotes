@@ -19,7 +19,7 @@ port 2: data in
  x |x |x
 
 
-4096 = vilken ruta
+4096 = which square
 
 4097 = ruta 1
 4098 = ruta 2
@@ -37,17 +37,4 @@ port 2: data in
 4107 = input 
 4108 = draw buffer
 4109 = winstatus
-
-                          
- #-----------------------#
- |                       |
- |  ____           ____  |
- |  |   |          |   | |
- |  |   |          |   | |
- |  |  *|          |  *| |
- |__|___|__________|___|_|
- |                       |
- |                       |
- #-----------------------#
- dörr välj rätt dörr spel
- rysk roulette
+4110 = old input
